@@ -78,7 +78,7 @@ public class EditUser extends AppCompatActivity {
 
         update = findViewById(R.id.update);
 
-        camera=findViewById(R.id.iv_camera);
+        camera = findViewById(R.id.iv_camera);
 
 
         //Setting date text
@@ -90,15 +90,15 @@ public class EditUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateData();
-                if(imageUri!=null) {
+                if (imageUri != null) {
                     uploadProfileImage(imageUri);
                 }
             }
         });
-        auth=FirebaseAuth.getInstance();
-        reference= FirebaseDatabase.getInstance().getReference().child("Users");
-        storageProfilePicRif= FirebaseStorage.getInstance().getReference().child(mUser.getUid());
-        StorageReference profileRef=storageProfilePicRif.child("profilePic.jpg");
+        auth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        storageProfilePicRif = FirebaseStorage.getInstance().getReference().child(mUser.getUid());
+        StorageReference profileRef = storageProfilePicRif.child("profilePic.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -109,8 +109,8 @@ public class EditUser extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openGalleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent,1000);
+                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGalleryIntent, 1000);
 
             }
         });
@@ -120,9 +120,9 @@ public class EditUser extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==1000){
-            if(resultCode== Activity.RESULT_OK){
-                imageUri=data.getData();
+        if (requestCode == 1000) {
+            if (resultCode == Activity.RESULT_OK) {
+                imageUri = data.getData();
                 Log.d("Uri", String.valueOf(imageUri));
                 profilePicture.setImageURI(imageUri);
 
@@ -130,9 +130,9 @@ public class EditUser extends AppCompatActivity {
         }
     }
 
-    private void uploadProfileImage( Uri imageUri){
+    private void uploadProfileImage(Uri imageUri) {
         //Upload Image to Firebase Storage
-        StorageReference fileRef=storageProfilePicRif.child("profilePic.jpg");
+        StorageReference fileRef = storageProfilePicRif.child("profilePic.jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -146,7 +146,7 @@ public class EditUser extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(EditUser.this,"Failed Uploading Image...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditUser.this, "Failed Uploading Image...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -180,8 +180,8 @@ public class EditUser extends AppCompatActivity {
     public void updateData() {
         String userName = username.getText().toString();
         String email = emailAddress.getText().toString();
-        Log.d("username",userName);
-        Log.d("Email",email);
+        Log.d("username", userName);
+        Log.d("Email", email);
 
         if (userName.isEmpty()) {
             userName = username.getHint().toString();
@@ -197,8 +197,8 @@ public class EditUser extends AppCompatActivity {
         User.put("userName", userName);
         User.put("email", email);
 
-
-        reference.child(mUser.getUid()).updateChildren(User).addOnCompleteListener(new OnCompleteListener<Void>() {
+        DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Admins");
+        reference1.child(mUser.getUid()).updateChildren(User).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

@@ -90,7 +90,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/editicon"
             android:layout_below="@+id/game"
-            android:layout_marginLeft="320dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentEnd="true"
             android:onClick="gotoedit"/>
 
         <ImageView
