@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register"
+
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bgcover"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/registerImage"
+            android:layout_width="600dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/signin"
+            android:layout_marginTop="40dp"/>
+
+        <EditText
+            android:id="@+id/Signinemail"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="75dp"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_below="@+id/registerImage"
+            android:hint="Enter Email :"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/white"
+            android:backgroundTint="@color/white" />
+
+        <EditText
+            android:id="@+id/signinpw"
+            android:layout_width="381dp"
+            android:layout_height="56dp"
+            android:layout_below="@+id/Signinemail"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="-1dp"
+            android:backgroundTint="@color/white"
+            android:hint="Enter Password :"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+
+        <Button
+            android:id="@+id/signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/signinpw"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/white"
+            android:paddingHorizontal="50dp"
+            android:textColor="@color/black"
+            app:cornerRadius="20dp"
+            android:text="Sign In"
+
+            />
+
+        <Button
+            android:id="@+id/signinsup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/signin"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/white"
+            android:paddingHorizontal="50dp"
+            android:textColor="@color/black"
+            app:cornerRadius="20dp"
+            android:text="Sign Up"
+
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/forgetpw"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/signinsup"
+            android:text="Forget Password?"
+            android:textAlignment="center"
+            android:textColor="@color/browser_actions_bg_grey"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSignin"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </RelativeLayout>
+</ScrollView>

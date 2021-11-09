@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "417444273764",
+    "firebase_url": "https://thinkableproject-15f91-default-rtdb.firebaseio.com",
+    "project_id": "thinkableproject-15f91",
+    "storage_bucket": "thinkableproject-15f91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417444273764:android:d513a4e421b51e5393c971",
+        "android_client_info": {
+          "package_name": "com.example.adminthinkable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwc2puJOeTUfpYB_uSrNENuV5um-URnEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417444273764:android:d36d4da47f244a7693c971",
+        "android_client_info": {
+          "package_name": "com.example.otp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417444273764-09lmrgig27cg48ioe0qpjv2ruqojeumm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.otp",
+            "certificate_hash": "540d27766eccc4edff68b1e84d31eb16216b4394"
+          }
+        },
+        {
+          "client_id": "417444273764-0ce2totmiq6bhmjjlhbd8afemuqkc6at.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.otp",
+            "certificate_hash": "818fff2af538241edbc21e933b33c45b96a5424d"
+          }
+        },
+        {
+          "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwc2puJOeTUfpYB_uSrNENuV5um-URnEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417444273764:android:b93909bc87f4a89d93c971",
+        "android_client_info": {
+          "package_name": "com.example.thinkableproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417444273764-6qvntfaas5ich49e12fsuh7bhtfqae2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkableproject",
+            "certificate_hash": "540d27766eccc4edff68b1e84d31eb16216b4394"
+          }
+        },
+        {
+          "client_id": "417444273764-8if2fp8kna95ih0e31m7vfnonvmevtg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thinkableproject",
+            "certificate_hash": "818fff2af538241edbc21e933b33c45b96a5424d"
+          }
+        },
+        {
+          "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwc2puJOeTUfpYB_uSrNENuV5um-URnEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417444273764-8063e4mavdbkqmlvhp1o10gb2snomk67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

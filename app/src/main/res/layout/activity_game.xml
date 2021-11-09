@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/game">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="300dp"
+
+            android:id="@+id/ll2g"
+
+            android:orientation="vertical"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn"
+
+
+                android:text="Upload image"
+                android:textColor="@color/white"
+                />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                app:srcCompat="@drawable/camera"
+
+                android:id="@+id/songimageg"
+                android:layout_marginTop="10dp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:layout_below="@+id/ll2g"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll31g"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:hint="Enter Id :"
+                    android:textColorHint="@color/black"
+                    android:layout_marginTop="30dp"
+
+                    android:id="@+id/enteridg"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:hint="Enter Game Name :"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/black"
+
+                    android:id="@+id/enternameg"/>
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:id="@+id/progressbarg"
+                    android:layout_marginTop="10dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonUploadg"
+
+                    android:background="@drawable/btn"
+                    android:text="upload"
+                    android:textColor="@color/white"
+                    android:onClick="uploadFileTofirebaseg"
+                    android:layout_below="@+id/enternameg"
+                    android:layout_marginTop="30dp"/>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</ScrollView>

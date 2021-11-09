@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Meditate"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/meditate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll1m"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical"
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn"
+                android:text="Upload Mp3"
+                android:onClick="openAudioFilesm"
+                android:id="@+id/openAudioFilesm"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="No file selected"
+                android:id="@+id/textViewSongsFilesSelectedm"/>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+
+            android:id="@+id/ll2m"
+            android:layout_below="@+id/ll1m"
+            android:orientation="vertical"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn"
+
+
+                android:text="Upload image"
+                android:textColor="@color/white"
+                />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+                app:srcCompat="@drawable/camera"
+                android:layout_marginTop="10dp"
+
+                android:id="@+id/songimagem"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:layout_below="@+id/ll2m"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll31m"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:hint="Enter Id :"
+                    android:textColorHint="@color/black"
+                    android:layout_marginTop="30dp"
+
+                    android:id="@+id/enteridm"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:hint="Enter Song Name :"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/black"
+
+                    android:id="@+id/enternamem"/>
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:id="@+id/progressbarm"
+                    android:layout_marginTop="10dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonUploadm"
+
+                    android:background="@drawable/btn"
+                    android:text="upload"
+                    android:textColor="@color/white"
+                    android:onClick="uploadFileTofirebasem"
+                    android:layout_below="@+id/enternamem"
+                    android:layout_marginTop="30dp"/>
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</ScrollView>
