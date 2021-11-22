@@ -27,11 +27,20 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.adminthinkable.Model.UploadSong;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -39,8 +48,18 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
+        AdapterView.OnItemClickListener {
+
+    private RequestQueue mRequestQue;
+    private String URL = "https://fcm.googleapis.com/fcm/send";
 
     TextView textViewImage;
     ProgressBar progressBar;
@@ -58,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ImageView songimage;
     Button uploadBtn,showAllBtn;
     EditText Enterid,EnterName;
+    AppCompatButton buttonNotify;
 //    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Songs");
 //    private StorageReference reference = FirebaseStorage.getInstance().getReference().child("Songs");
 
@@ -74,6 +94,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         songimage = findViewById(R.id.songimage);
         EnterName=findViewById(R.id.entername);
         editSong=findViewById(R.id.editSgs);
+        buttonNotify=findViewById(R.id.buttonNotify);
+        mRequestQue= Volley.newRequestQueue(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -118,6 +141,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        buttonNotify.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                sendNotification();
+            }
+        });
+
 //        uploadBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -133,6 +163,51 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //        });
 
     }
+
+    private void sendNotification() {
+        JSONObject mainobj = new JSONObject();
+        try {
+            mainobj.put("to","/topics/"+"news");
+            JSONObject notificatioinObj = new JSONObject();
+            notificatioinObj.put("title","Music");
+            notificatioinObj.put("body","New music track was added!!");
+            mainobj.put("notification",notificatioinObj);
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                    mainobj,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    },new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+
+
+            }
+
+            ){
+                @Override
+                public Map<String,String> getHeaders()throws AuthFailureError {
+                    Map<String,String> header = new HashMap<>();
+                    header.put("content-type","application/json");
+                    header.
+                            put("authorization",
+                                    "key=AAAAYTGeHmQ:APA91bGcM2zXzcA0hv5ssW8kE4BTBmlsK5uhHz6UQm2Ur8vuqUoZDErFKUvX7m_-S9m7cmIe5picpG79jk4z1UfB4YuZ3shx1fpEAmh0YzA4L1x85pOlgfNP4bPorTE70ORGqbXdemLq");
+                    return header;
+                }
+            };
+            mRequestQue.add(request);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 

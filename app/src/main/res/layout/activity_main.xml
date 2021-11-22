@@ -153,6 +153,19 @@
                 android:layout_below="@+id/entername"
                 android:layout_marginTop="30dp"/>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonNotify"
+
+                android:background="@drawable/btn"
+                android:text="Notify Users"
+                android:textColor="@color/white"
+                android:onClick="uploadFileTofirebase"
+                android:layout_below="@+id/entername"
+                android:layout_marginTop="30dp"/>
+
+
 
 
         </LinearLayout>
