@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,19 +17,16 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.adminthinkable.Model.UploadImage;
 import com.example.adminthinkable.Model.UploadSong;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,9 +37,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
@@ -51,7 +48,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     StorageReference mStorageref;
     StorageTask mUploadsTask;
     DatabaseReference referenceSongs;
+    ImageView editSong;
     String songsCategory;
+    Uri imageUrl;
     MediaMetadataRetriever metadataRetriever;
     byte []art;
     String title1,artist1,album_art1 = "",duration1;
@@ -74,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Enterid=findViewById(R.id.enterid);
         songimage = findViewById(R.id.songimage);
         EnterName=findViewById(R.id.entername);
+        editSong=findViewById(R.id.editSgs);
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -109,6 +109,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 galleryIntent.setType("image/*");
 
                 ImageResultLauncher.launch(galleryIntent);
+            }
+        });
+        editSong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), DisplayUploadedSongs.class));
             }
         });
 
@@ -268,12 +274,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
     private void uploadFiles(){
+        StorageReference storageReference=FirebaseStorage.getInstance().getReference(Enterid.getText().toString());
+        StorageReference fileRef = storageReference.child("musicImage.jpg");
+        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri imageUriUpload) {
+                        Picasso.get().load(imageUriUpload).into(songimage);
+                        imageUrl=imageUriUpload;
+                        Log.d("Url", String.valueOf(imageUriUpload));
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(MainActivity.this, "Failed Uploading Image...", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         if(audioUri != null){
             Toast.makeText(this,"Upload please wait !",Toast.LENGTH_SHORT);
             progressBar.setVisibility(View.VISIBLE);
-            final StorageReference storageReference = mStorageref.child(System.currentTimeMillis()+"."+getfileextension(audioUri));
+            final StorageReference storageReference1 = mStorageref.child(System.currentTimeMillis()+"."+getfileextension(audioUri));
             mUploadsTask=storageReference.putFile(audioUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -281,8 +307,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            UploadSong uploadSong = new UploadSong(uri.toString(),imageUri.toString(),Enterid.getText().toString(),EnterName.getText().toString());
+                            UploadSong uploadSong = new UploadSong(uri.toString(),imageUrl.toString(),Enterid.getText().toString(),EnterName.getText().toString());
+                            Log.d("ImagewUrl",imageUrl.toString());
                             String uploadId= referenceSongs.push().getKey();
+                            Log.d("UploadId",referenceSongs.push().getKey());
                             referenceSongs.child(uploadId).setValue(uploadSong);
 
 

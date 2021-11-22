@@ -19,9 +19,7 @@ public class Landing extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
-
         logout=findViewById(R.id.logout);
-
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,29 +33,21 @@ public class Landing extends AppCompatActivity {
 
     public void gotoMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-
-
         startActivity(intent);
     }
 
     public void gotoMeditate(View view) {
         Intent intent = new Intent(this, Meditate.class);
-
-
         startActivity(intent);
     }
 
     public void gotogame(View view) {
         Intent intent = new Intent(this, Game.class);
-
-
         startActivity(intent);
     }
 
     public void gotoedit(View view) {
         Intent intent = new Intent(this, EditUser.class);
-
-
         startActivity(intent);
     }
 }

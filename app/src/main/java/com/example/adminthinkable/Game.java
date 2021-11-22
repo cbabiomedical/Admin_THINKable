@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -40,13 +41,14 @@ public class Game extends AppCompatActivity {
     StorageReference mStoragerefg;
     StorageTask mUploadsTaskg;
     DatabaseReference referenceSongsg;
+    ImageView editGame;
     String songsCategoryg;
     MediaMetadataRetriever metadataRetrieverg;
-    byte []art;
-    String title1,artist1,album_art1 = "",duration1;
-    TextView titleg,artist,durations,album,dataa;
+    byte[] art;
+    String title1, artist1, album_art1 = "", duration1;
+    TextView titleg, artist, durations, album, dataa;
     ImageView songimageg;
-    Button uploadBtn,showAllBtn;
+    Button uploadBtn, showAllBtn;
     EditText Enteridg, EnterNameg;
 //    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Songs");
 //    private StorageReference reference = FirebaseStorage.getInstance().getReference().child("Songs");
@@ -57,12 +59,13 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        progressBarg =findViewById(R.id.progressbarg);
+        progressBarg = findViewById(R.id.progressbarg);
 
-//        uploadBtn=findViewById(R.gameId.openAImageFiles);
-        Enteridg =findViewById(R.id.enteridg);
+//       uploadBtn=findViewById(R.gameId.openAImageFiles);
+        Enteridg = findViewById(R.id.enteridg);
         songimageg = findViewById(R.id.songimageg);
-        EnterNameg =findViewById(R.id.enternameg);
+        EnterNameg = findViewById(R.id.enternameg);
+        editGame = findViewById(R.id.editGame);
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -72,6 +75,13 @@ public class Game extends AppCompatActivity {
         metadataRetrieverg = new MediaMetadataRetriever();
         referenceSongsg = FirebaseDatabase.getInstance().getReference().child("Games_Admin");
         mStoragerefg = FirebaseStorage.getInstance().getReference().child("Games_Admin");
+
+        editGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),DisplayUploadedGames.class));
+            }
+        });
 
 //        Spinner spinner = findViewById(R.gameId.spinner);
 //
@@ -118,14 +128,11 @@ public class Game extends AppCompatActivity {
     }
 
 
-
-    private String getFileExtention(Uri muri){
+    private String getFileExtention(Uri muri) {
         ContentResolver crg = getContentResolver();
         MimeTypeMap mimeg = MimeTypeMap.getSingleton();
         return mimeg.getExtensionFromMimeType(crg.getType(muri));
     }
-
-
 
 
     ActivityResultLauncher<Intent> ImageResultLauncherg = registerForActivityResult(
@@ -145,12 +152,6 @@ public class Game extends AppCompatActivity {
                     }
                 }
             });
-
-
-
-
-
-
 
 
 //    public void openAudioFilesm(View v){
@@ -180,23 +181,24 @@ public class Game extends AppCompatActivity {
 //    }
 
 
-    public void uploadFileTofirebaseg(View v){
+    public void uploadFileTofirebaseg(View v) {
 
 
-            if (mUploadsTaskg != null && mUploadsTaskg.isInProgress()){
-                Toast.makeText(this,"games uploads in already progress !",Toast.LENGTH_SHORT);
-            }else{
-                uploadFilesg();
-            }
+        if (mUploadsTaskg != null && mUploadsTaskg.isInProgress()) {
+            Toast.makeText(this, "games uploads in already progress !", Toast.LENGTH_SHORT);
+        } else {
+            uploadFilesg();
+        }
 
     }
-    private void uploadFilesg(){
+
+    private void uploadFilesg() {
 
 
-        if(imageUrig != null){
-            Toast.makeText(this,"Upload please wait !",Toast.LENGTH_SHORT);
+        if (imageUrig != null) {
+            Toast.makeText(this, "Upload please wait !", Toast.LENGTH_SHORT);
             progressBarg.setVisibility(View.VISIBLE);
-            final StorageReference storageReferenceg = mStoragerefg.child(System.currentTimeMillis()+"."+getfileextension(imageUrig));
+            final StorageReference storageReferenceg = mStoragerefg.child(System.currentTimeMillis() + "." + getfileextension(imageUrig));
             mUploadsTaskg = storageReferenceg.putFile(imageUrig).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -209,36 +211,31 @@ public class Game extends AppCompatActivity {
                             referenceSongsg.child(uploadIdg).setValue(uploadGame);
 
 
-
                         }
                     });
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                    double progress = (100.0* snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                     progressBarg.setProgress((int) progress);
                 }
             });
 
 
-        }else{
-            Toast.makeText(this,"No file Selected to uploads",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No file Selected to uploads", Toast.LENGTH_SHORT).show();
         }
 
 
-
-
     }
 
-    private String getfileextension(Uri imageUrig){
-        ContentResolver contentResolverm =getContentResolver();
-        MimeTypeMap mimeTypeMapm =MimeTypeMap.getSingleton();
+    private String getfileextension(Uri imageUrig) {
+        ContentResolver contentResolverm = getContentResolver();
+        MimeTypeMap mimeTypeMapm = MimeTypeMap.getSingleton();
         return mimeTypeMapm.getExtensionFromMimeType(contentResolverm.getType(imageUrig));
 
     }
-
-
 
 
 //    @Override

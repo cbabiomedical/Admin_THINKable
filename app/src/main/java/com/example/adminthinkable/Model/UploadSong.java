@@ -11,25 +11,22 @@ public class UploadSong {
 
 
 
-
-    public UploadSong(String songTitle1,String imageUrl,String id,String name) {
-//        if (songTitle.trim().equals("")){
-//            songTitle= "No Title";
-//        }
-
-        this.songTitle1 = songTitle1;
-        this.imageUrl = imageUrl;
-        this.id=id;
-        this.name=name;
-
-
-
-
+    public UploadSong() {
     }
 
+    public UploadSong(String songTitle1, String imageUrl, String id, String name) {
+        this.imageUrl = imageUrl;
+        this.id = id;
+        this.name = name;
+        this.songTitle1 = songTitle1;
+    }
 
-
-//    public UploadSong(String songsCategory, String title1, String toString) {
+    public UploadSong(String songTitle1, String imageUrl, String name) {
+        this.songTitle1 = songTitle1;
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+    //    public UploadSong(String songsCategory, String title1, String toString) {
 
 
     public String getImageUrl() {
@@ -62,5 +59,18 @@ public class UploadSong {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        return "UploadSong{" +
+                "songTitle1='" + songTitle1 + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

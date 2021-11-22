@@ -8,8 +8,8 @@ public class UploadGame {
     public String gameId;
 
 
-
-
+    public UploadGame() {
+    }
 
     public UploadGame(String gameImage, String gameName, String gameId) {
 //        if (songTitle.trim().equals("")){
@@ -56,6 +56,12 @@ public class UploadGame {
     //    public UploadSong(String songsCategory, String title1, String toString) {
 
 
-
-
+    @Override
+    public String toString() {
+        return "UploadGame{" +
+                "gameImage='" + gameImage + '\'' +
+                ", gameName='" + gameName + '\'' +
+                ", gameId='" + gameId + '\'' +
+                '}';
+    }
 }

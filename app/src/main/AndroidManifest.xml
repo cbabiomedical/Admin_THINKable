@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.adminthinkable">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AdminThinkable">
-        <activity android:name=".EditUser"></activity>
+        <activity android:name=".PlayMeditation"></activity>
+        <activity android:name=".PlayMusicActivity" />
+        <activity android:name=".EditMeditation" />
+        <activity android:name=".DisplayMeditateSongs" />
+        <activity android:name=".EditMusicPage" />
+        <activity android:name=".DisplayUploadedSongs" />
+        <activity android:name=".EditUser" />
         <activity android:name=".VerifyPhoneActivity" />
         <activity android:name=".EnterPhoneNumber" />
         <activity android:name=".Game" />
         <activity android:name=".Meditate" />
         <activity android:name=".Landing" />
+        <activity android:name=".DisplayUploadedGames" />
+        <activity android:name=".EditGamePage" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".Signin">
             <intent-filter>

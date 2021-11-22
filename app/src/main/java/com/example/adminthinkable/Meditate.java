@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,6 +17,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adminthinkable.Model.UploadMeditate;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,6 +38,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class Meditate extends AppCompatActivity {
 
@@ -42,6 +46,7 @@ public class Meditate extends AppCompatActivity {
     ProgressBar progressBarm;
     Uri audioUrim, imageUrim;
     StorageReference mStoragerefm;
+    Uri imageUrl;
     StorageTask mUploadsTaskm;
     DatabaseReference referenceSongsm;
     String songsCategorym;
@@ -52,6 +57,7 @@ public class Meditate extends AppCompatActivity {
     ImageView songimagem;
     Button uploadBtn,showAllBtn;
     EditText Enteridm, EnterNamem;
+    ImageView editmeditation;
 //    private DatabaseReference root = FirebaseDatabase.getInstance().getReference().child("Songs");
 //    private StorageReference reference = FirebaseStorage.getInstance().getReference().child("Songs");
 
@@ -67,6 +73,7 @@ public class Meditate extends AppCompatActivity {
         Enteridm =findViewById(R.id.enteridm);
         songimagem = findViewById(R.id.songimagem);
         EnterNamem =findViewById(R.id.enternamem);
+        editmeditation=findViewById(R.id.editMeditation);
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -93,7 +100,12 @@ public class Meditate extends AppCompatActivity {
 //        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinner.setAdapter(dataAdapter);
 
-
+        editmeditation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),DisplayMeditateSongs.class));
+            }
+        });
         songimagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,6 +261,27 @@ public class Meditate extends AppCompatActivity {
         }
     }
     private void uploadFilesm(){
+        StorageReference storageReference=FirebaseStorage.getInstance().getReference(Enteridm.getText().toString());
+        StorageReference fileRef = storageReference.child("musicImage.jpg");
+        fileRef.putFile(imageUrim).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri imageUriUpload) {
+                        Picasso.get().load(imageUriUpload).into(songimagem);
+                        imageUrl=imageUriUpload;
+                        Log.d("Url", String.valueOf(imageUriUpload));
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Meditate.this, "Failed Uploading Image...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
         if(audioUrim != null){
@@ -262,7 +295,7 @@ public class Meditate extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            UploadMeditate uploadMeditate = new UploadMeditate(uri.toString(), imageUrim.toString(), Enteridm.getText().toString(), EnterNamem.getText().toString());
+                            UploadMeditate uploadMeditate = new UploadMeditate(uri.toString(),imageUrl.toString(), Enteridm.getText().toString(), EnterNamem.getText().toString());
                             String uploadIdm = referenceSongsm.push().getKey();
                             referenceSongsm.child(uploadIdm).setValue(uploadMeditate);
 

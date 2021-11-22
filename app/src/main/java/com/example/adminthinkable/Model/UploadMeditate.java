@@ -1,7 +1,7 @@
 package com.example.adminthinkable.Model;
 
 public class UploadMeditate {
-    public String Mp3Title;
+    public String url;
     public String meditateImage;
     public String mediateId;
     public String meditateName;
@@ -9,12 +9,12 @@ public class UploadMeditate {
 
 
 
-    public UploadMeditate(String Mp3Title,String meditateImage,String mediateId,String meditateName) {
+    public UploadMeditate(String url,String meditateImage,String mediateId,String meditateName) {
 //        if (songTitle.trim().equals("")){
 //            songTitle= "No Title";
 //        }
 
-        this.Mp3Title = Mp3Title;
+        this.url = url;
         this.meditateImage = meditateImage;
         this.mediateId =mediateId;
         this.meditateName=meditateName;
@@ -24,12 +24,15 @@ public class UploadMeditate {
 
     }
 
-    public String getMp3Title() {
-        return Mp3Title;
+    public UploadMeditate() {
     }
 
-    public void setMp3Title(String mp3Title) {
-        Mp3Title = mp3Title;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getMeditateImage() {
@@ -59,5 +62,13 @@ public class UploadMeditate {
     //    public UploadSong(String songsCategory, String title1, String toString) {
 
 
-
+    @Override
+    public String toString() {
+        return "UploadMeditate{" +
+                "url='" + url + '\'' +
+                ", meditateImage='" + meditateImage + '\'' +
+                ", mediateId='" + mediateId + '\'' +
+                ", meditateName='" + meditateName + '\'' +
+                '}';
+    }
 }
