@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/landing"
+    android:background="@drawable/sinnewone"
     tools:context=".EditUser">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,11 +68,12 @@
             android:layout_height="50dp"
             android:textColor="@color/white"
             android:layout_below="@+id/email"
-            android:text="UPDATE"
+            android:text="Update"
+            android:textAllCaps="false"
             android:textSize="20sp"
             app:cornerRadius="10dp"
-            android:textStyle="bold"
-            android:background="@drawable/updatebtn"
+
+            android:background="@drawable/adminbtn"
             android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

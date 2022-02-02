@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Landing"
-    android:background="@drawable/landing"
+    android:background="@drawable/sinnewone"
 
     >
     <RelativeLayout
@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/title"
+            android:src="@drawable/admintitle"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"/>
 
@@ -40,10 +40,11 @@
             android:layout_centerHorizontal="true"
             android:paddingHorizontal="50dp"
             android:onClick="gotoMain"
-            android:background="@drawable/updatebtn"
+            android:background="@drawable/adminbtn"
 
             android:layout_marginTop="260dp"
             android:id="@+id/already"
+            android:textAllCaps="false"
 
 
             ></androidx.appcompat.widget.AppCompatButton>
@@ -58,12 +59,13 @@
             android:layout_centerHorizontal="true"
             android:paddingHorizontal="50dp"
             android:onClick="gotoMeditate"
-            android:background="@drawable/updatebtn"
+            android:background="@drawable/adminbtn"
 
             android:layout_marginTop="20dp"
             android:id="@+id/meditate"
 
             android:layout_below="@+id/already"
+            android:textAllCaps="false"
 
             ></androidx.appcompat.widget.AppCompatButton>
 
@@ -77,9 +79,10 @@
             android:layout_centerHorizontal="true"
             android:paddingHorizontal="50dp"
             android:onClick="gotogame"
-            android:background="@drawable/updatebtn"
+            android:background="@drawable/adminbtn"
 
             android:layout_marginTop="20dp"
+            android:textAllCaps="false"
             android:id="@+id/game"
 
             android:layout_below="@+id/meditate"
@@ -88,8 +91,9 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/editicon"
+            android:src="@drawable/adminedit"
             android:layout_below="@+id/game"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:layout_alignParentEnd="true"
             android:onClick="gotoedit"/>
@@ -97,7 +101,9 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/logout"
+            android:src="@drawable/adminlogout"
+            android:layout_marginTop="20dp"
+
             android:layout_below="@+id/game"
             android:id="@+id/logout"/>
 

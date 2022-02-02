@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Register extends AppCompatActivity {
     private EditText username, emailAddress, userPassword, re_enterPassword;
@@ -38,6 +40,8 @@ public class Register extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    FirebaseFirestore database;
+
 
     AutoCompleteTextView act;
     private final static int RC_SIGN_IN = 123;
@@ -49,6 +53,9 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_register);
 
         // connecting backend variables to front end components
@@ -69,6 +76,7 @@ public class Register extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Admins");
         //Getting an instance of firebase Auth class
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseFirestore.getInstance();
 
         //onClick Function of Sign in TextView
 
@@ -177,6 +185,28 @@ public class Register extends AppCompatActivity {
 
                                 }
                             });
+
+                    String uid = task.getResult().getUser().getUid();
+                    database.collection("admins").document(uid).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                //If task complete navigating from Register Activity to Suggestions Activity
+                                Intent intentveri = new Intent(Register.this, Signin.class);
+                                startActivity(intentveri);
+                                // Display Toast message "Registration successful"
+                                Toast.makeText(Register.this, "Registration Complete", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                // Display Toast message "Registration failed" if error occurs
+                                Toast.makeText(Register.this, "Registration Unsuccessful. Try Again!", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+                            // Setting visibility of progress bar once the registration function is complete
+                            progressBar.setVisibility(View.GONE);
+
+                        }
+                    });
                 }
             }
         });

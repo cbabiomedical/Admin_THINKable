@@ -69,7 +69,7 @@ tools:context=".Register"
             android:paddingTop="5dp"
             android:backgroundTint="@color/white"
             android:hint="Password :"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textColor="@color/white"
             />
 

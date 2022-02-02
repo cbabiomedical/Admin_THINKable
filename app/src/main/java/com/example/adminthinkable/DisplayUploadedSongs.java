@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.example.adminthinkable.Model.UploadMeditate;
 import com.example.adminthinkable.Model.UploadSong;
@@ -31,6 +32,10 @@ public class DisplayUploadedSongs extends AppCompatActivity implements MusicAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_display_uploaded_songs);
         reference = FirebaseDatabase.getInstance().getReference().child("Songs_Admin");
         recyclerView = findViewById(R.id.recyclerView);

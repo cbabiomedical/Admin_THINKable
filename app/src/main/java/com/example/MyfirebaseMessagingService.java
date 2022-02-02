@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.adminthinkable.R;
+import com.google.android.gms.common.internal.service.Common;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -47,5 +48,22 @@ public class MyfirebaseMessagingService extends FirebaseMessagingService{
         NotificationManagerCompat.from(this).notify(1,notification.build());
 
         super.onMessageReceived(remoteMessage);
+    }
+
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+        updateTokenToFirebase(s);
+    }
+
+    private void updateTokenToFirebase(String token) {
+
+
+
+
+
+
+
+
     }
 }
