@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/CardView.Light"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/videoImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@color/cardview_shadow_start_color"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/videoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Sudoku"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="120dp"/>
+        <TextView
+            android:id="@+id/videoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="textEnd"
+            android:layout_marginLeft="40dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="id"
+            android:layout_toRightOf="@+id/videoTitle"/>
+
+        <ImageView
+            android:id="@+id/deleteVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
+            android:id="@+id/editVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:layout_toLeftOf="@+id/deleteVideo"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

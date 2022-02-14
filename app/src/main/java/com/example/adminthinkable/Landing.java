@@ -45,6 +45,10 @@ public class Landing extends AppCompatActivity {
         Intent intent = new Intent(this, Game.class);
         startActivity(intent);
     }
+    public void gotovideo(View view) {
+        Intent intent = new Intent(this, VideoActivity.class);
+        startActivity(intent);
+    }
 
     public void gotoedit(View view) {
         Intent intent = new Intent(this, EditUser.class);
