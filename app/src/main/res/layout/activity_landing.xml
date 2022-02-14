@@ -88,6 +88,23 @@
             android:layout_below="@+id/meditate"
 
             ></androidx.appcompat.widget.AppCompatButton>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cornerRadius="20dp"
+            android:text="Video"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:paddingHorizontal="50dp"
+            android:onClick="gotovideo"
+            android:background="@drawable/updatebtn"
+            android:layout_marginTop="20dp"
+            android:id="@+id/video"
+            android:layout_below="@+id/game"
+
+            ></androidx.appcompat.widget.AppCompatButton>
         <ImageView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
