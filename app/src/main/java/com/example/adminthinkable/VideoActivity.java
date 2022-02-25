@@ -21,10 +21,12 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,15 +53,18 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class VideoActivity extends AppCompatActivity {
+public class VideoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,AdapterView.OnItemClickListener {
 
     private RequestQueue mRequestQue;
     private String URL = "https://fcm.googleapis.com/fcm/send";
 
     TextView textViewImage;
+    Spinner spinner;
     ProgressBar progressBar;
     Uri audioUri, imageUri;
     StorageReference mStorageref;
@@ -91,6 +96,8 @@ public class VideoActivity extends AppCompatActivity {
         EnterName = findViewById(R.id.entername);
         editSong = findViewById(R.id.editSgs);
         buttonNotify = findViewById(R.id.buttonNotify);
+        spinner = findViewById(R.id.spinnerCategories);
+
         mRequestQue = Volley.newRequestQueue(this);
         FirebaseMessaging.getInstance().subscribeToTopic("news");
 //        artist=findViewById(R.gameId.artist);
@@ -100,24 +107,23 @@ public class VideoActivity extends AppCompatActivity {
 //        album_art=findViewById(R.gameId.imageview);
 
         metadataRetriever = new MediaMetadataRetriever();
-        referenceSongs = FirebaseDatabase.getInstance().getReference().child("Video_Admin");
         mStorageref = FirebaseStorage.getInstance().getReference().child("Video_Admin");
 
 //        Spinner spinner = findViewById(R.gameId.spinner);
 //
-//        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(this);
 //
-//        List<String> catrgories = new ArrayList<>();
+       List<String> catrgories = new ArrayList<>();
 //
-//        catrgories.add("Love songs");
-//        catrgories.add("Sad songs");
-//        catrgories.add("Party songs");
+        catrgories.add("Concentration");
+        catrgories.add("Relaxation");
+       catrgories.add("Memory");
 //        catrgories.add("Birthday songs");
 //        catrgories.add("God songs");
 //
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,catrgories);
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(dataAdapter);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,catrgories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
 
 
         songimage.setOnClickListener(new View.OnClickListener() {
@@ -324,6 +330,25 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void uploadFiles() {
+
+        if (songsCategory.equals("Concentration")) {
+
+            referenceSongs = FirebaseDatabase.getInstance().getReference("Videos_Admin").child("Videos_Concentration");}
+
+        else if (songsCategory.equals("Relaxation")){
+
+            referenceSongs = FirebaseDatabase.getInstance().getReference("Videos_Admin").child("Videos_Relaxation");
+            Log.d("Path", String.valueOf(referenceSongs));
+
+
+        }
+        else if(songsCategory.equals("Memory")){
+            referenceSongs = FirebaseDatabase.getInstance().getReference("Videos_Admin").child("Videos_Memory");
+
+
+        }
+
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(Enterid.getText().toString());
         StorageReference fileRef = storageReference.child("musicImage.jpg");
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -357,7 +382,7 @@ public class VideoActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            UploadVideo uploadSong = new UploadVideo( Enterid.getText().toString(),EnterName.getText().toString(),imageUrl.toString(),uri.toString(),"0"  );
+                            UploadVideo uploadSong = new UploadVideo(songsCategory, Enterid.getText().toString(),EnterName.getText().toString(),imageUrl.toString(),uri.toString(),"0"  );
                             Log.d("ImagewUrl", imageUrl.toString());
                             String uploadId = referenceSongs.push().getKey();
                             Log.d("UploadId", referenceSongs.push().getKey());
@@ -393,5 +418,27 @@ public class VideoActivity extends AppCompatActivity {
 
 
     public void openImageFiles(View view) {
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+        songsCategory=adapterView.getItemAtPosition(i).toString();
+
+
+        Toast.makeText(this,"Selected: "+songsCategory,Toast.LENGTH_SHORT).show();
+        Log.d("Category",songsCategory);
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

@@ -6,36 +6,20 @@ public class UploadSong {
 
     public String songTitle1;
     public String imageUrl;
-    public String id;
+
     public String name;
+    public String songsCategory;
+    public String id;
 
 
-
-    public UploadSong() {
-    }
-
-    public UploadSong(String songTitle1, String imageUrl, String id, String name) {
+    public UploadSong(String songsCategory, String songTitle1, String imageUrl, String name, String id, String s) {
+        this.songTitle1 = songTitle1;
         this.imageUrl = imageUrl;
+        this.name = name;
+        this.songsCategory = songsCategory;
         this.id = id;
-        this.name = name;
-        this.songTitle1 = songTitle1;
     }
 
-    public UploadSong(String songTitle1, String imageUrl, String name) {
-        this.songTitle1 = songTitle1;
-        this.imageUrl = imageUrl;
-        this.name = name;
-    }
-    //    public UploadSong(String songsCategory, String title1, String toString) {
-
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getSongTitle1() {
         return songTitle1;
@@ -45,12 +29,12 @@ public class UploadSong {
         this.songTitle1 = songTitle1;
     }
 
-    public String getId() {
-        return id;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -61,7 +45,21 @@ public class UploadSong {
         this.name = name;
     }
 
+    public String getSongsCategory() {
+        return songsCategory;
+    }
 
+    public void setSongsCategory(String songsCategory) {
+        this.songsCategory = songsCategory;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
     @Override
@@ -69,8 +67,9 @@ public class UploadSong {
         return "UploadSong{" +
                 "songTitle1='" + songTitle1 + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", songsCategory='" + songsCategory + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 }

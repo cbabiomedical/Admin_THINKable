@@ -95,11 +95,12 @@
             android:layout_height="100dp"
             app:cornerRadius="20dp"
             android:text="Video"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:paddingHorizontal="50dp"
             android:onClick="gotovideo"
-            android:background="@drawable/updatebtn"
+            android:background="@drawable/adminbtn"
             android:layout_marginTop="20dp"
             android:id="@+id/video"
             android:layout_below="@+id/game"
@@ -109,7 +110,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/adminedit"
-            android:layout_below="@+id/game"
+            android:layout_below="@+id/video"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:layout_alignParentEnd="true"
@@ -121,7 +122,7 @@
             android:src="@drawable/adminlogout"
             android:layout_marginTop="20dp"
 
-            android:layout_below="@+id/game"
+            android:layout_below="@+id/video"
             android:id="@+id/logout"/>
 
 

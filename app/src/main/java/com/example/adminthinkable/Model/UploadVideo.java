@@ -7,6 +7,7 @@ public class UploadVideo {
     public String videoImage;
     public String videoUrl;
     private String fav;
+    private String songsCategory;
 
 
 
@@ -15,12 +16,15 @@ public class UploadVideo {
     public UploadVideo() {
     }
 
-    public UploadVideo(String videoId, String videoName, String videoImage, String videoUrl, String fav) {
+    public UploadVideo(String songsCategory,String videoId, String videoName, String videoImage, String videoUrl, String fav) {
+
+        this.songsCategory =songsCategory;
         this.videoId = videoId;
         this.videoName = videoName;
         this.videoImage = videoImage;
         this.videoUrl = videoUrl;
         this.fav = fav;
+
     }
 
     public UploadVideo(String videoId, String videoName, String videoImage, String videoUrl) {
@@ -73,6 +77,14 @@ public class UploadVideo {
         this.fav = fav;
     }
 
+    public String getSongsCategory() {
+        return songsCategory;
+    }
+
+    public void setSongsCategory(String songsCategory) {
+        this.songsCategory = songsCategory;
+    }
+
     @Override
     public String toString() {
         return "UploadVideo{" +
@@ -81,6 +93,7 @@ public class UploadVideo {
                 ", videoImage='" + videoImage + '\'' +
                 ", videoUrl='" + videoUrl + '\'' +
                 ", fav='" + fav + '\'' +
+                ", songsCategory='" + songsCategory + '\'' +
                 '}';
     }
 }

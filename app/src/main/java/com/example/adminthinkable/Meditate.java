@@ -22,10 +22,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,13 +43,18 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-public class Meditate extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Meditate extends AppCompatActivity implements AdapterView.OnItemSelectedListener,AdapterView.OnItemClickListener {
 
     TextView textViewImagem;
     ProgressBar progressBarm;
     Uri audioUrim, imageUrim;
     StorageReference mStoragerefm;
+    Spinner spinner;
     Uri imageUrl;
+    String songsCategory;
     StorageTask mUploadsTaskm;
     DatabaseReference referenceSongsm;
     String songsCategorym;
@@ -78,6 +85,9 @@ public class Meditate extends AppCompatActivity {
         songimagem = findViewById(R.id.songimagem);
         EnterNamem =findViewById(R.id.enternamem);
         editmeditation=findViewById(R.id.editMeditation);
+
+        spinner = findViewById(R.id.spinnerCategories);
+
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -85,24 +95,20 @@ public class Meditate extends AppCompatActivity {
 //        album_art=findViewById(R.gameId.imageview);
 
         metadataRetrieverm = new MediaMetadataRetriever();
-        referenceSongsm = FirebaseDatabase.getInstance().getReference().child("Meditation_Admin");
         mStoragerefm = FirebaseStorage.getInstance().getReference().child("Meditation_Admin");
 
-//        Spinner spinner = findViewById(R.gameId.spinner);
+        spinner.setOnItemSelectedListener(this);
 //
-//        spinner.setOnItemSelectedListener(this);
+        List<String> catrgories = new ArrayList<>();
 //
-//        List<String> catrgories = new ArrayList<>();
+        catrgories.add("Concentration");
+        catrgories.add("Relaxation");
+        catrgories.add("Memory");
+
 //
-//        catrgories.add("Love songs");
-//        catrgories.add("Sad songs");
-//        catrgories.add("Party songs");
-//        catrgories.add("Birthday songs");
-//        catrgories.add("God songs");
-//
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,catrgories);
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(dataAdapter);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,catrgories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
 
         editmeditation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,6 +271,25 @@ public class Meditate extends AppCompatActivity {
         }
     }
     private void uploadFilesm(){
+
+        if (songsCategory.equals("Concentration")) {
+
+            referenceSongsm = FirebaseDatabase.getInstance().getReference("Meditation_Admin").child("Meditation_Concentration");}
+
+        else if (songsCategory.equals("Relaxation")){
+
+            referenceSongsm = FirebaseDatabase.getInstance().getReference("Meditation_Admin").child("Meditation_Relaxation");
+            Log.d("Path", String.valueOf(referenceSongsm));
+
+
+        }
+        else if(songsCategory.equals("Memory")){
+            referenceSongsm = FirebaseDatabase.getInstance().getReference("Meditation_Admin").child("Meditation_Memory");
+
+
+        }
+
+
         StorageReference storageReference=FirebaseStorage.getInstance().getReference(Enteridm.getText().toString());
         StorageReference fileRef = storageReference.child("musicImage.jpg");
         fileRef.putFile(imageUrim).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -299,7 +324,7 @@ public class Meditate extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            UploadMeditate uploadMeditate = new UploadMeditate(uri.toString(),imageUrl.toString(), Enteridm.getText().toString(), EnterNamem.getText().toString());
+                            UploadMeditate uploadMeditate = new UploadMeditate(songsCategory,uri.toString(),imageUrl.toString(), Enteridm.getText().toString(), EnterNamem.getText().toString());
                             String uploadIdm = referenceSongsm.push().getKey();
                             referenceSongsm.child(uploadIdm).setValue(uploadMeditate);
 
@@ -339,5 +364,24 @@ public class Meditate extends AppCompatActivity {
 //    }
 
     public void openImageFiles(View view) {
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        songsCategory = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(this,"Selected"+songsCategory, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

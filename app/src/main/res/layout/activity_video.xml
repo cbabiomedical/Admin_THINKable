@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/music">
+        android:background="@drawable/video">
         <!--        <androidx.appcompat.widget.AppCompatButton-->
         <!--            android:id="@+id/editSgs"-->
         <!--            android:layout_width="wrap_content"-->
@@ -134,6 +134,42 @@
                     android:textColorHint="@color/black"
 
                     android:id="@+id/entername"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/entername"
+                    android:orientation="horizontal"
+
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="291dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="Choose category :"
+                        android:layout_marginTop="30dp"
+                        android:textColor="@color/black"
+
+                        android:id="@+id/entercategory"/>
+
+
+                    <Spinner
+                        android:id="@+id/spinnerCategories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dropdown"
+                        android:layout_marginTop="30dp"
+
+
+                        android:theme="@android:style/Holo.Light.ButtonBar.AlertDialog" />
+
+
+                </LinearLayout>
+
                 <ProgressBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

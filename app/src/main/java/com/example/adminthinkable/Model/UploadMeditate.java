@@ -5,11 +5,12 @@ public class UploadMeditate {
     public String meditateImage;
     public String mediateId;
     public String meditateName;
+    public String songsCategory;
 
 
 
 
-    public UploadMeditate(String url,String meditateImage,String mediateId,String meditateName) {
+    public UploadMeditate(String songsCategory,String url,String meditateImage,String mediateId,String meditateName) {
 //        if (songTitle.trim().equals("")){
 //            songTitle= "No Title";
 //        }
@@ -18,13 +19,11 @@ public class UploadMeditate {
         this.meditateImage = meditateImage;
         this.mediateId =mediateId;
         this.meditateName=meditateName;
+        this.songsCategory = songsCategory;
 
 
 
 
-    }
-
-    public UploadMeditate() {
     }
 
     public String getUrl() {
@@ -59,7 +58,13 @@ public class UploadMeditate {
         this.meditateName = meditateName;
     }
 
-    //    public UploadSong(String songsCategory, String title1, String toString) {
+    public String getSongsCategory() {
+        return songsCategory;
+    }
+
+    public void setSongsCategory(String songsCategory) {
+        this.songsCategory = songsCategory;
+    }
 
 
     @Override
@@ -69,6 +74,7 @@ public class UploadMeditate {
                 ", meditateImage='" + meditateImage + '\'' +
                 ", mediateId='" + mediateId + '\'' +
                 ", meditateName='" + meditateName + '\'' +
+                ", songsCategory='" + songsCategory + '\'' +
                 '}';
     }
 }

@@ -6,28 +6,15 @@ public class UploadGame {
     public String gameImage;
     public String gameName;
     public String gameId;
+    public String songsCategory;
 
 
-    public UploadGame() {
-    }
-
-    public UploadGame(String gameImage, String gameName, String gameId) {
-//        if (songTitle.trim().equals("")){
-//            songTitle= "No Title";
-//        }
-
-
+    public UploadGame(String gameImage, String gameName, String gameId, String songsCategory) {
         this.gameImage = gameImage;
         this.gameName = gameName;
         this.gameId = gameId;
-
-
-
-
-
+        this.songsCategory = songsCategory;
     }
-
-
 
     public String getGameImage() {
         return gameImage;
@@ -35,14 +22,6 @@ public class UploadGame {
 
     public void setGameImage(String gameImage) {
         this.gameImage = gameImage;
-    }
-
-    public String getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
     }
 
     public String getGameName() {
@@ -53,8 +32,21 @@ public class UploadGame {
         this.gameName = gameName;
     }
 
-    //    public UploadSong(String songsCategory, String title1, String toString) {
+    public String getGameId() {
+        return gameId;
+    }
 
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getSongsCategory() {
+        return songsCategory;
+    }
+
+    public void setSongsCategory(String songsCategory) {
+        this.songsCategory = songsCategory;
+    }
 
     @Override
     public String toString() {
@@ -62,6 +54,7 @@ public class UploadGame {
                 "gameImage='" + gameImage + '\'' +
                 ", gameName='" + gameName + '\'' +
                 ", gameId='" + gameId + '\'' +
+                ", songsCategory='" + songsCategory + '\'' +
                 '}';
     }
 }

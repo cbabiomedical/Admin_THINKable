@@ -14,13 +14,17 @@ import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,16 +38,20 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-public class Game extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Game extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener{
 
     TextView textViewImageg;
     ProgressBar progressBarg;
     Uri audioUrig, imageUrig;
+    Spinner spinner;
     StorageReference mStoragerefg;
     StorageTask mUploadsTaskg;
     DatabaseReference referenceSongsg;
     ImageView editGame;
-    String songsCategoryg;
+    String songsCategory;
     MediaMetadataRetriever metadataRetrieverg;
     byte[] art;
     String title1, artist1, album_art1 = "", duration1;
@@ -70,6 +78,9 @@ public class Game extends AppCompatActivity {
         songimageg = findViewById(R.id.songimageg);
         EnterNameg = findViewById(R.id.enternameg);
         editGame = findViewById(R.id.editGame);
+
+        spinner = findViewById(R.id.spinnerCategories);
+
 //        artist=findViewById(R.gameId.artist);
 //        durations=findViewById(R.gameId.duration);
 //        album=findViewById(R.gameId.album);
@@ -77,8 +88,22 @@ public class Game extends AppCompatActivity {
 //        album_art=findViewById(R.gameId.imageview);
 
         metadataRetrieverg = new MediaMetadataRetriever();
-        referenceSongsg = FirebaseDatabase.getInstance().getReference().child("Games_Admin");
+
         mStoragerefg = FirebaseStorage.getInstance().getReference().child("Games_Admin");
+
+
+        spinner.setOnItemSelectedListener(this);
+//
+        List<String> catrgories = new ArrayList<>();
+//
+        catrgories.add("Concentration");
+        catrgories.add("Relaxation");
+        catrgories.add("Memory");
+
+//
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,catrgories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
 
         editGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +224,25 @@ public class Game extends AppCompatActivity {
     private void uploadFilesg() {
 
 
+        if (songsCategory.equals("Concentration")) {
+
+            referenceSongsg = FirebaseDatabase.getInstance().getReference("Games_Admin").child("Games_Concentration");}
+        else if (songsCategory.equals("Relaxation")){
+
+            referenceSongsg = FirebaseDatabase.getInstance().getReference("Games_Admin").child("Games_Relaxation");
+
+
+        }
+        else if(songsCategory.equals("Memory")){
+            referenceSongsg = FirebaseDatabase.getInstance().getReference("Games_Admin").child("Games_Memory");
+
+
+        }
+
+
+
+
+
         if (imageUrig != null) {
             Toast.makeText(this, "Upload please wait !", Toast.LENGTH_SHORT);
             progressBarg.setVisibility(View.VISIBLE);
@@ -210,7 +254,7 @@ public class Game extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            UploadGame uploadGame = new UploadGame(uri.toString(), EnterNameg.getText().toString(), Enteridg.getText().toString());
+                            UploadGame uploadGame = new UploadGame(uri.toString(), EnterNameg.getText().toString(), Enteridg.getText().toString(),songsCategory);
                             String uploadIdg = referenceSongsg.push().getKey();
                             referenceSongsg.child(uploadIdg).setValue(uploadGame);
 
@@ -248,5 +292,24 @@ public class Game extends AppCompatActivity {
 //    }
 
     public void openImageFiles(View view) {
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        songsCategory = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(this,"Selected"+songsCategory, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
     }
 }
